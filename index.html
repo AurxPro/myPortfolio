@@ -2,13 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio Website</title>
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Darsh's Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -23,50 +19,73 @@
       <a href="#">Awards</a>
       <a href="#">Contact</a>
     </nav>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
   </header>
 
   <section class="home">
     <div class="home-img">
-      <img src="Darsh.png" alt="Photo of Darsh" />
+      <img src="Darsh.png" alt="Darsh's Image" />
     </div>
     <div class="home-content">
-      <h1>
-        Hi, It's <span>Darsh</span>
-      </h1>
-      <h3 class="typing-text">
-        I'm a <span></span>
-      </h3>
+      <h1>Hi, It's <span>Darsh.</span></h1>
+      <h3 class="typing-text">I'm a <span></span></h3>
       <p>
-        Darsh is a driven and tech-savvy student at NUS High School in
-        Singapore with a strong passion for coding and game development.
-        Proficient in Python and web development, he is currently expanding
-        his skills in Unity to bring creative ideas to life. Beyond academics,
-        Darsh enjoys competitive gaming, particularly in Minecraft BedWars and
-        Valorant. With a keen interest in technology and innovation, he is
-        focused on building impactful projects while navigating challenges
-        with determination and a growth mindset.
+        Darsh is a driven and tech-savvy student at NUS High School in Singapore with a strong passion for coding and game development. Proficient in Python and web development, he is currently expanding his skills in Unity to bring creative ideas to life. Beyond academics, Darsh enjoys competitive gaming, particularly in Minecraft BedWars and Valorant. With a keen interest in technology and innovation, he is focused on building impactful projects while navigating challenges with determination and a growth mindset.
       </p>
       <div class="social-icons">
-        <a href="#" aria-label="LinkedIn"
-          ><i class="fa-brands fa-linkedin"></i
-        ></a>
         <a href="https://github.com/AurxPro" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+        <a href="https://scratch.mit.edu/users/YourScratchUsername/" aria-label="Scratch"><i class="fa-solid fa-puzzle-piece"></i></a>
         <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
       </div>
     </div>
   </section>
 
   <script>
-    const words = [
-      "Python Programmer",
-      "Game Developer",
-      "NUS High School Student",
-      "Gamer",
-    ];
+    function toggleMenu() {
+      const nav = document.querySelector('header nav');
+      nav.classList.toggle('active');
+    }
 
-    let i = 0;
-    let timer;
+    // Close menu on nav link click
+    document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('header nav').classList.remove('active');
+    });
+    });
+
+    // Close menu when clicking outside (mobile)
+    document.addEventListener('click', function (event) {
+    const nav = document.querySelector('header nav');
+    const menuIcon = document.querySelector('.menu-icon');
+    
+    // Check if nav is open AND click is outside nav + menu icon
+    if (
+        nav.classList.contains('active') &&
+        !nav.contains(event.target) &&
+        !menuIcon.contains(event.target)
+    ) {
+        nav.classList.remove('active');
+    }
+    });
+
+    // Close menu on nav click (mobile)
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('header nav').classList.remove('active');
+      });
+    });
+
+    // Typing effect
+    const words = [
+      "Python Coder",
+      "Game Dev",
+      "NUS High Student",
+      "Gamer"
+    ];
+    let i = 0, timer;
     const typingSpeed = 150;
     const erasingSpeed = 75;
     const delayBetweenWords = 1500;
@@ -92,8 +111,7 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       const typingSpan = document.querySelector(".typing-text span");
-      if (!typingSpan) return;
-      typeWriter(typingSpan, words[i], 0);
+      if (typingSpan) typeWriter(typingSpan, words[i], 0);
     });
   </script>
 </body>
