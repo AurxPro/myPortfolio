@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Darsh's Hobbies</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .cursor {
+      display: inline-block;
+      color: #52b74b;
+      animation: blink 0.8s steps(1) infinite;
+      font-weight: bold;
+      margin-left: 2px;
+    }
+
+    .cursor:nth-of-type(2) {
+      display: none;
+    }
+
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      51%, 100% {
+        opacity: 0;
+      }
+    }
+
+    .arrow-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .arrow-buttons button {
+      background-color: black;
+      color: #52b74b;
+      font-size: 2.8rem;
+      border: 2px solid #52b74b;
+      border-radius: 1rem;
+      padding: 1.2rem 1.8rem;
+      margin: 0 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .arrow-buttons button:hover {
+      background-color: #52b74b;
+      color: black;
+      transform: scale(1.15);
+      box-shadow: 0 0 18px #52b74b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">Darsh</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#">Projects</a>
+      <a href="#">Skills</a>
+      <a href="hobbies.html" class="active">Hobbies</a>
+      <a href="#">Awards</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="menu-icon" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </header>
+
+  <section class="home">
+    <div class="home-img">
+      <img src="Darsh.png" alt="Darsh's Image" />
+    </div>
+    <div class="home-content">
+      <h1>Hi, It's <span>Darsh.</span></h1>
+      <h3 class="typing-text">
+        I'm interested in <span id="interest-text"></span><span class="cursor">|</span>
+      </h3>
+      <p>
+        <span id="interest-description"></span>
+      </p>
+      <div class="arrow-buttons">
+        <button id="left-arrow" aria-label="Previous Interest"><i class="fa-solid fa-left-long"></i></button>
+        <button id="right-arrow" aria-label="Next Interest"><i class="fa-solid fa-right-long"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.querySelector('header nav');
+      nav.classList.toggle('active');
+    }
+
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('header nav').classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      const nav = document.querySelector('header nav');
+      const menuIcon = document.querySelector('.menu-icon');
+      if (
+        nav.classList.contains('active') &&
+        !nav.contains(event.target) &&
+        !menuIcon.contains(event.target)
+      ) {
+        nav.classList.remove('active');
+      }
+    });
+
+    const interests = [
+      {
+        title: "Gaming",
+        desc: "I mainly play Minecraft and Valorant. In Valorant, I'm a dedicated Yoru main, with my flash + teleport rotation being my signature move, and I absolutely love cloning into the site to effectively bait out enemy utilities, allowing me to push in safely. I'm also learning how to silent TP with Yoru, allowing me to do the absolute craziest flanks and clutches! When I pop out of ultimate, I usually set up a fake teleport beforehand near the enemies, and then I activate the fake teleport, to make them look in the wrong direction, allowing me to get free kills! I feel kind of sad that I can't seem to get out of the Iron rank even though almost all aspects of my gameplay are good compared to the average iron player. I also play Minecraft BedWars, where I love to rush and destroy beds. My favourite strategy is to rush the enemy with 48 wool blocks and a wooden sword, and speedbridge to their base."
+      },
+      {
+        title: "Coding",
+        desc: "I love coding, especially in Python and Unity! The logical process of devising a solution to a complex problem and it working flawlessly is like my drive to keep going. I started coding in JavaScript at the age of 6, which, in my opinion, is CRAZY considering that I was making things that university freshmen were doing as their final projects. I then moved on to Scratch, where I made a TON of games, and those were so fun to make, and show my friends! I moved to Python at the age of 9, and initially, after learning the basics, I thought I wanted to dive into PyGame fully, I realized that that was pretty time-consuming, so I took a step back and moved to Discord bots, and I made a few of those running on my friends' servers. After that, I took a break from Python and moved to HTML and CSS to learn the basics of web development. I then came back to Python and relearnt the basics, after which I tried doing file manipulation and leaderboards. After which, I started a major project of making an advanced cipher that could encrypt and decrypt messages using a custom algorithm, but more on that in my projects page. After which, I moved to Unity, where I'm making a game right now, again more on that in my projects page. I also made a few games in Scratch, which are pretty fun to play, and I still play them sometimes!"
+      },
+      {
+        title: "Problem Solving",
+        desc: "From logic puzzles to redstone contraptions, I love cracking challenges and thinking outside the box! 🧠🧩"
+      },
+      {
+        title: "Chess",
+        desc: "Chess hones my tactics and foresight. Every game is a war of brains and strategy. ♟️🔥"
+      }
+    ];
+
+    const interestText = document.getElementById("interest-text");
+    const interestDesc = document.getElementById("interest-description");
+    const leftArrow = document.getElementById("left-arrow");
+    const rightArrow = document.getElementById("right-arrow");
+    let i = 0;
+
+    function typeTogether(title, desc) {
+      interestText.textContent = "";
+      interestDesc.textContent = "";
+
+      const totalDuration = 1500;
+      const totalChars = title.length + desc.length;
+
+      let startTime = null;
+      let typedChars = 0;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+
+        const targetChars = Math.floor((elapsed / totalDuration) * totalChars);
+
+        while (typedChars < targetChars && typedChars < totalChars) {
+          if (typedChars < title.length) {
+            interestText.textContent += title.charAt(typedChars);
+          } else {
+            interestDesc.textContent += desc.charAt(typedChars - title.length);
+          }
+          typedChars++;
+        }
+
+        if (typedChars < totalChars) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function eraseBoth(callback) {
+      const title = interestText.textContent;
+      const desc = interestDesc.textContent;
+      const totalDuration = 1500;
+      const totalChars = title.length + desc.length;
+
+      let startTime = null;
+      let erasedChars = 0;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const targetErased = Math.floor((elapsed / totalDuration) * totalChars);
+
+        while (erasedChars < targetErased && erasedChars < totalChars) {
+          if (desc.length - erasedChars > 0) {
+            interestDesc.textContent = desc.substring(0, desc.length - erasedChars);
+          } else if (title.length - (erasedChars - desc.length) > 0) {
+            interestText.textContent = title.substring(0, title.length - (erasedChars - desc.length));
+          }
+          erasedChars++;
+        }
+
+        if (erasedChars < totalChars) {
+          requestAnimationFrame(step);
+        } else {
+          callback();
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function changeInterest(direction) {
+      i = (i + direction + interests.length) % interests.length;
+      eraseBoth(() => {
+        const interest = interests[i];
+        typeTogether(interest.title, interest.desc);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      typeTogether(interests[i].title, interests[i].desc);
+    });
+
+    leftArrow.addEventListener("click", () => changeInterest(-1));
+    rightArrow.addEventListener("click", () => changeInterest(1));
+  </script>
+</body>
+</html>
