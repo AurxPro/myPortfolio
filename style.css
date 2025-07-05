@@ -128,7 +128,12 @@ span {
 
 .home-content p {
   font-size: 1.6rem;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.8;
+  letter-spacing: 0.03rem;
 }
+
 
 .home-img {
   border-radius: 50%;
