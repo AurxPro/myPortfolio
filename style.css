@@ -233,3 +233,16 @@ span {
     margin-top: 4rem;
   }
 }
+
+.social-section {
+  margin-top: 4rem;
+}
+
+.social-title {
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #52b74b;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
