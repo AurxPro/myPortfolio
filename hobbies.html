@@ -7,6 +7,27 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
   <style>
+
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .logo-img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .logo-text {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #52b74b;
+      }
+
     .cursor {
       display: inline-block;
       color: #52b74b;
@@ -53,11 +74,57 @@
       transform: scale(1.15);
       box-shadow: 0 0 18px #52b74b;
     }
-  </style>
+
+      .home-img-75 {
+        display: block;
+        width: 90%;
+        height: 90%;
+    }
+
+    .home-img {
+      display: flex;
+      flex-shrink: 0;
+      margin: 0;
+      overflow: visible;
+      transform: scale(0.75);
+      transform-origin: center;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .home-img:hover {
+      transform: scale(0.8);
+      box-shadow: 0 0 1000px #52b74b88;
+    }
+
+    .home {
+      display: flex;
+      align-items: center;          /* Vertically center image & content */
+      justify-content: flex-start;  /* Keep everything left aligned */
+      gap: 2rem;                    /* Space between image and text */
+      min-height: 350px;            /* Prevent height jumps when text changes */
+      padding: 1rem 3rem;
+    }
+
+    .home-content {
+      flex: 1;                     /* Take up remaining space */
+      min-height: 280px;   
+      margin-right: 5.5rem;
+      margin-left: 5.5rem;        /* Prevent vertical shrinking */
+    }
+
+    .info-text {
+      color: #ffffff;
+      margin-right: 100px;
+    }
+</style>
 </head>
 <body>
   <header>
-    <a href="index.html" class="logo">Darsh</a>
+    <div class="logo-container">
+      <img src="Darsh.png" alt="Darsh's Icon" class="logo-img" />
+      <a href="index.html" class="logo-text">Darsh</a>
+    </div>
+
     <nav>
       <a href="index.html">Home</a>
       <a href="#">Projects</a>
@@ -73,7 +140,7 @@
 
   <section class="home">
     <div class="home-img">
-      <img src="Darsh.png" alt="Darsh's Image" />
+      <img src="Darsh_Coding.png" alt="Darsh's Image" class="home-img-75"/>
     </div>
     <div class="home-content">
       <h1>Hi, It's <span>Darsh.</span></h1>
@@ -81,7 +148,7 @@
         I'm interested in <span id="interest-text"></span><span class="cursor">|</span>
       </h3>
       <p>
-        <span id="interest-description"></span>
+        <span class="info-text" id="interest-description"></span>
       </p>
       <div class="arrow-buttons">
         <button id="left-arrow" aria-label="Previous Interest"><i class="fa-solid fa-left-long"></i></button>
@@ -116,23 +183,28 @@
 
     const interests = [
         {
-        title: "Business Ideation",
+        title: "Business Ideation.",
         desc: "At 12, I first read the book, 'Rich Dad Poor Dad', which opened my eyes to the world of business and entrepreneurship. I started thinking about how I could create something that would not only be fun but also solve real problems. I love brainstorming ideas for apps and websites that could make life easier or more enjoyable for people. Although these ideas just come and go, I do have a few that constantly stay in my mind rent-free and I think about them everyday. One of my ideas is to use Shopify to make a dropshipping store that sells [ITEM A] and [ITEM B]. Using Auto DS, I can automate the entire process of finding suppliers, listing products, and fulfilling orders. This would allow me to focus on marketing and growing the business without getting bogged down in the day-to-day operations. I also think about how I could use social media to promote my store and reach a wider audience."
         },  
 
         {
-        title: "Coding",
+        title: "Coding.",
         desc: "I love coding, especially in Python and Unity! The logical process of devising a solution to a complex problem and it working flawlessly is like my drive to keep going. I started coding in JavaScript at the age of 6, which, in my opinion, is CRAZY considering that I was making things that university freshmen were doing as their final projects. I then moved on to Scratch, where I made a TON of games, and those were so fun to make, and show my friends! I moved to Python at the age of 9, and initially, after learning the basics, I thought I wanted to dive into PyGame fully, I realized that that was pretty time-consuming, so I took a step back and moved to Discord bots, and I made a few of those running on my friends' servers. After that, I took a break from Python and moved to HTML and CSS to learn the basics of web development. I then came back to Python and relearnt the basics, after which I tried doing file manipulation and leaderboards. After which, I started a major project of making an advanced cipher that could encrypt and decrypt messages using a custom algorithm, but more on that in my projects page. After which, I moved to Unity, where I'm making a game right now, again more on that in my projects page. I also made a few games in Scratch, which are pretty fun to play, and I still play them sometimes!"
         },
 
         {
-        title: "Robotics",
+        title: "Robotics.",
         desc: "Though this is similar to coding, here I want to emphasize more on the designing and building aspect. I love the process of taking a concept and turning it into a physical object. Whether it's building a robot for a competition or creating a simple machine to solve a problem, I find joy in the hands-on work. I enjoy using tools like Lego Mindstorms Robot Inventor to create cool interactive robots. A few that I made are a robot that can solve a Rubik's Cube, a robot that can print text and a robot that can 'explore' the house using sensors. I love the rewarding feeling after seeing my creations coming to life and performing tasks I programemed them to do. Though not a fan of troubleshooting, I understand that it's a part of the process, and I try to learn from each challenge I face. I also enjoy participating in robotics competitions, where I can showcase my skills and learn from others."
         },        
         
         {
-        title: "Gaming",
+        title: "Gaming.",
         desc: "I mainly play Minecraft and Valorant. In Valorant, I'm a dedicated Yoru main, with my flash + teleport rotation being my signature move, and I absolutely love cloning into the site to effectively bait out enemy utilities, allowing me to push in safely. I'm also learning how to silent TP with Yoru, allowing me to do the absolute craziest flanks and clutches! When I pop out of ultimate, I usually set up a fake teleport beforehand near the enemies, and then I activate the fake teleport, to make them look in the wrong direction, allowing me to get free kills! I feel kind of sad that I can't seem to get out of the Iron rank even though almost all aspects of my gameplay are good compared to the average iron player. I also play Minecraft BedWars, where I love to rush and destroy beds. My favourite strategy is to rush the enemy with 48 wool blocks and a wooden sword, and speedbridge to their base."
+        },
+
+        {
+        title: "Reading.",
+        desc: "I love reading books, and this habit has followed me since I was 4 years old. Contrary to the 'expectations' that a 4 year old would read, I borrowed science non-ficion books from the library and read them cover to cover. I was fascinated by the world of science and how it explained the universe around us. As I grew older, my reading interests expanded to include fiction and even self-help. My brain seemed to be in reverse; reading non-fiction at 4, and then transitioning to fiction at 9. And now, at the age of 12, I find myself reading self-help books, particularly those focusing on business and finance. I love the way these books challenge my thinking and provide practical advice that I can apply to my own life. One of my favorite books is 'Rich Dad Poor Dad' by Robert Kiyosaki, which opened my eyes to the world of business and entrepreneurship."
         }
 
 
