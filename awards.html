@@ -1,1 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Darsh's Timeline</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: black;
+    color: white;
+  }
+
+  header {
+    margin-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 9%;
+    background-color: transparent;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.6));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    position: relative;
+    z-index: 101;
+  }
+
+  .logo-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .logo-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #52b74b;
+  }
+
+  nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+  }
+
+  nav a {
+    font-size: 1.8rem;
+    color: white;
+    margin: 0 2rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent;
+  }
+
+  nav a:hover,
+  nav a.active {
+    color: #52b74b;
+    border-bottom: 3px solid #52b74b;
+  }
+
+  .menu-icon {
+    display: none;
+    font-size: 2.4rem;
+    color: #52b74b;
+    cursor: pointer;
+  }
+
+  @media (max-width: 995px) {
+    .menu-icon {
+      display: block;
+      font-size: 2.4rem;
+      color: #52b74b;
+      cursor: pointer;
+      z-index: 102;
+    }
+
+    nav {
+      position: absolute;
+      display: none;
+      top: 0;
+      right: 0;
+      transform: none;
+      left: auto;
+      width: 40%;
+      border-left: 3px solid #52b74b;
+      border-bottom: 3px solid #52b74b;
+      border-bottom-left-radius: 2rem;
+      padding: 1rem;
+      background-color: #161616;
+      border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    nav.active {
+      display: block;
+    }
+
+    nav a {
+      display: block;
+      font-size: 2rem;
+      margin: 3rem 0;
+    }
+
+    nav a:hover,
+    nav a.active {
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border-bottom: 0.5rem solid #52b74b;
+    }
+  }
+
+  section {
+    min-height: 100vh;
+    padding: 5rem 9% 5rem;
+  }
+
+  .timeline-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 8rem;
+  }
+
+  .timeline-container h1 {
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .timeline-container h1 span {
+    color: #52b74b;
+  }
+
+  .timeline {
+    position: relative;
+    margin-left: 2rem;
+    padding-left: 2rem;
+    border-left: 3px solid #52b74b;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3.5rem;
+    padding-left: 2rem;
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -13px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: #52b74b;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #52b74baa;
+    transition: background-color 0.3s ease;
+  }
+
+  .timeline-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #52b74bcc;
+    background-color: #0b230b;
+  }
+
+  .timeline-date {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #52b74b;
+  }
+
+  .timeline-title {
+    font-weight: 600;
+    font-size: 2.4rem;
+    color: #52b74b;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-desc {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    color: #ffffff;
+    text-align: justify;
+    text-justify: inter-word;
+    letter-spacing: 0.03rem;
+  }
+
+  .timeline-img {
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 1rem;
+    box-shadow: 0 0 18px #52b74b88;
+    transition: transform 0.3s ease;
+  }
+
+  .timeline-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #52b74bcc;
+  }
+
+  @media (max-width: 1000px) {
+    .timeline-container {
+      padding-top: 6rem;
+    }
+  }
+
+  @media (max-width: 995px) {
+    .timeline-container {
+      margin: 5rem 4rem;
+      padding-top: 8rem;
+    }
+
+    .timeline-container h1 {
+      font-size: 5rem;
+    }
+
+    .timeline {
+      margin-left: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .timeline-item {
+      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-date {
+      font-size: 1.6rem;
+    }
+
+    .timeline-title {
+      font-size: 2rem;
+    }
+
+    .timeline-desc {
+      font-size: 1.4rem;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="Darsh.png" alt="Darsh's Icon" class="logo-img" />
+      <a href="index.html" class="logo-text">Darsh</a>
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="#">Skills</a>
+      <a href="hobbies.html">Hobbies</a>
+      <a href="awards.html" class="active">Awards</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </header>
+
+  <section>
+    <div class="timeline-container">
+      <h1>My <span>Timeline</span></h1>
+      <div class="timeline" id="timeline">
+        <!-- Timeline items injected here -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.querySelector('header nav');
+      nav.classList.toggle('active');
+    }
+
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('header nav').classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      const nav = document.querySelector('header nav');
+      const menuIcon = document.querySelector('.menu-icon');
+      if (
+        nav.classList.contains('active') &&
+        !nav.contains(event.target) &&
+        !menuIcon.contains(event.target)
+      ) {
+        nav.classList.remove('active');
+      }
+    });
+
+    const timelineEvents = [
+      {
+        date: "November 2024",
+        title: "NUS High School of Mathematics and Science Admission Letter",
+        desc: "On 20 November 2024, I received my admission letter to NUS High School of Mathematics and Science in the PSLE results slip. This marked a significant milestone in my academic journey, opening doors to advanced studies in mathematics and science.",
+        img: "NIL"
+      },
+      {
+        date: "October 2024",
+        title: "2nd Place Hoverhack Coding Competition",
+        desc: "In October 2024, my team secured 2nd place in the Hoverhack Coding Competition, a competition where both python programming and drone flying skills were tested. There were 2 sections, first one being an autonomous section where my team had to write python code to make a drone do various tricks such as flips, barrel rolls and autonomous flight. In this section, due to my experience in Python coding, my team told me to code all of the tasks. The second section was a manual section where I had to fly the drone through a course with obstacles and do various tricks such as flips, barrel rolls and autonomous flight. I ended up flying the drone through the course, and my team ended up getting 2nd place in the competition. Also, my team got 255 points and the 1st place team got 256 points, so IT WAS VERY CLOSE.",
+        img: "wordle_solver.png"
+      }
+    ];
+
+    const timeline = document.getElementById('timeline');
+
+    function createTimelineItem(event) {
+      const item = document.createElement('div');
+      item.className = 'timeline-item';
+
+      let html = `
+        <div class="timeline-date">${event.date}</div>
+        <div class="timeline-title">${event.title}</div>
+        <div class="timeline-desc">${event.desc}</div>
+      `;
+
+      if (event.img) {
+        html += `<img src="${event.img}" alt="${event.title}" class="timeline-img" />`;
+      }
+
+      item.innerHTML = html;
+      return item;
+    }
+
+    timelineEvents.forEach(event => {
+      timeline.appendChild(createTimelineItem(event));
+    });
+  </script>
+</body>
+</html>
