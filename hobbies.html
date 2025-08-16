@@ -9,6 +9,22 @@
   <style>
 
 
+    /* Hide hamburger by default */
+    .menu-icon
+    {
+      display: none;
+    }
+
+    /* Show hamburger only below 995px */
+    @media (max-width: 995px)
+    {
+      .menu-icon
+      {
+        display: block;
+        cursor: pointer;
+      }
+    }
+
     .logo-container {
         display: flex;
         align-items: center;
@@ -127,10 +143,10 @@
 
     <nav>
       <a href="index.html">Home</a>
-      <a href="#">Projects</a>
+      <a href="projects.html">Projects</a>
       <a href="#">Skills</a>
       <a href="hobbies.html" class="active">Hobbies</a>
-      <a href="#">Awards</a>
+      <a href="awards.html">Awards</a>
       <a href="#">Contact</a>
     </nav>
     <div class="menu-icon" onclick="toggleMenu()">
