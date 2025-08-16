@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Darsh's Hobbies</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    /* Hide hamburger by default */
+    .menu-icon {
+      display: none;
+    }
+
+    /* Show hamburger only below 995px */
+    @media (max-width: 995px)
+    {
+      .menu-icon
+      {
+        display: block;
+        cursor: pointer;
+      }
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .logo-img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .logo-text {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #52b74b;
+      }
+
+    .cursor {
+      display: inline-block;
+      color: #52b74b;
+      animation: blink 0.8s steps(1) infinite;
+      font-weight: bold;
+      margin-left: 2px;
+    }
+
+    .cursor:nth-of-type(2) {
+      display: none;
+    }
+
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      51%, 100% {
+        opacity: 0;
+      }
+    }
+
+    .arrow-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .arrow-buttons button {
+      background-color: black;
+      color: #52b74b;
+      font-size: 2.8rem;
+      border: 2px solid #52b74b;
+      border-radius: 1rem;
+      padding: 1.2rem 1.8rem;
+      margin: 0 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .arrow-buttons button:hover {
+      background-color: #52b74b;
+      color: black;
+      transform: scale(1.15);
+      box-shadow: 0 0 18px #52b74b;
+    }
+
+      .home-img-75 {
+        display: block;
+        width: 90%;
+        height: 90%;
+    }
+
+    .home-img {
+      display: flex;
+      flex-shrink: 0;
+      margin: 0;
+      overflow: visible;
+      transform: scale(0.75);
+      transform-origin: center;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .home-img:hover {
+      transform: scale(0.8);
+      box-shadow: 0 0 1000px #52b74b88;
+    }
+
+    .home {
+      display: flex;
+      align-items: center;          /* Vertically center image & content */
+      justify-content: flex-start;  /* Keep everything left aligned */
+      gap: 2rem;                    /* Space between image and text */
+      min-height: 350px;            /* Prevent height jumps when text changes */
+      padding: 1rem 3rem;
+    }
+
+    .home-content {
+      flex: 1;                     /* Take up remaining space */
+      min-height: 280px;   
+      margin-right: 5.5rem;
+      margin-left: 5.5rem;        /* Prevent vertical shrinking */
+    }
+
+    .info-text {
+      color: #ffffff;
+      margin-right: 100px;
+    }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="Darsh.png" alt="Darsh's Icon" class="logo-img" />
+      <a href="index.html" class="logo-text">Darsh</a>
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#" class="active">Projects</a>
+      <a href="#">Skills</a>
+      <a href="hobbies.html">Hobbies</a>
+      <a href="awards.html">Awards</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </header>
+
+  <section class="home">
+    <div class="home-img">
+      <img src="Darsh_Coding.png" alt="Darsh's Image" class="home-img-75"/>
+    </div>
+    <div class="home-content">
+      <h1>Hi, It's <span>Darsh.</span></h1>
+      <h3 class="typing-text">
+        I made a <span id="interest-text"></span><span class="cursor">|</span>
+      </h3>
+      <p>
+        <span class="info-text" id="interest-description"></span>
+      </p>
+      <div class="arrow-buttons">
+        <button id="left-arrow" aria-label="Previous Interest"><i class="fa-solid fa-left-long"></i></button>
+        <button id="right-arrow" aria-label="Next Interest"><i class="fa-solid fa-right-long"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.querySelector('header nav');
+      nav.classList.toggle('active');
+    }
+
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('header nav').classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      const nav = document.querySelector('header nav');
+      const menuIcon = document.querySelector('.menu-icon');
+      if (
+        nav.classList.contains('active') &&
+        !nav.contains(event.target) &&
+        !menuIcon.contains(event.target)
+      ) {
+        nav.classList.remove('active');
+      }
+    });
+
+    const interests = [
+        {
+        title: "Custom Cipher.",
+        desc: "In my 2025 June Holdiays, I made a custom cipher that encrypts and decrypts messages using 4 layers of encryption. The first layer is my custom algorithm that turns the entire unicode character set into a 'keyboard' of characters, where the encrypted result is the process of moving a cursor around and reaching the character you want to type. My initial idea was to make it work for ASCII characters, and the keyboard being the actual QWERTY layout, but then I realized that it would be way too limiting, so I expanded it to the entire unicode character set to support any and all text. The second layer is also a custom algorithm. However, the previous cipher was a 'viusal' cipher since there was a visual representation of the keyboard. However, this cipher works on the more binary side of text. My 2nd layer takes in each character of the text and converts it into the unicode binary representation, and then it rearranges the bits to make a new character, and this character, alongside the ordering of the bits, is the final result of the second layer. The third layer is a simple XOR cipher with a user-given key. The key is literally anything, since in the end it converts to bytes and XORs the bytes of the text with that of the key. The final layer isn't exactly a layer, but more of a wrapper. It takes the new, possibly corrupted text, and encodes it with Base64, a common wrapper to make all characters ASCII-friendly. The decryption process is the exact opposite of the encryption process, and it works flawlessly! The reason I made this cipher is because [INSERT REASON HERE]. I also made a GUI for it, though its only a simple custom tkinter window with a text box and a button to encrypt and decrypt the text."
+        },
+
+        {
+        title: "Wordle Solver.",
+        desc: "In my 2025 June Holidays, I made a Wordle Solver that can solve Wordle in 6 guesses or less. Before I explain how it works, I want to clarify how Wordle works. In Wordle, you have 6 guesses to guess a 5-letter word. After each guess, the game gives you feedback on your guess: if a letter is in the word and in the correct position, it turns green; if a letter is in the word but in the wrong position, it turns yellow; and if a letter is not in the word at all, it turns gray. The goal is to use this feedback to narrow down the possibilities and guess the correct word within 6 tries. My Wordle Solver uses an array of the 13,000 words that are used in the game, and it uses entropy to determine the best guess. Entropy is a measure of how much information is provided after a certain guess. The solver calculates the entropy for each word in the list based on the feedback it would receive if that word were guessed. It then selects the word with the highest entropy as the next guess. This process continues until the correct word is found or all 6 guesses are used up. The solver is able to solve any Wordle puzzle in 6 guesses or less, and it can also be used to solve other similar word games. I made this solver because I wanted to challenge myself and see if I could create a program that could solve Wordle efficiently. The reason I made this was a bit weird. I saw my friend making a bot that could play Wordle and beat it in 8 guesses, and I thought to myself, 'I can do better than that!' So I set out to make a Wordle Solver that could beat the game in 6 guesses or less. I also wanted to learn more about algorithms and how they can be used to solve problems efficiently."
+        },
+
+        {
+        title: "Hangman Solver.",
+        desc: "In my 2025 June Holidays, I made a Hangman Solver that can solve Hangman puzzles in 6 guesses or less. Before I explain how it works, I want to clarify how Hangman works. In Hangman, you have a certain number of guesses to guess a word. After each guess, the game gives you feedback on your guess: if a letter is in the word, it is revealed in the correct position; if a letter is not in the word, it is not revealed. The goal is to use this feedback to narrow down the possibilities and guess the correct word within the given number of guesses. My Hangman Solver uses an array of the 1000 words that are used in the game, and it uses entropy to determine the best guess. Entropy is a measure of how much information is provided after a certain guess. The solver calculates the entropy for each word in the list based on the feedback it would receive if that word were guessed. It then selects the word with the highest entropy as the next guess. This process continues until the correct word is found or all guesses are used up. The solver is able to solve any Hangman puzzle in 6 guesses or less, and it can also be used to solve other similar word games. I made this solver because after making the Wordle Solver, I wanted to challenge myself and see if I could create a program that could solve Hangman efficiently. The reason I made this was because I was playing Hangman with my friends, and I realized that I wasn't able to guess the word in 6 guesses most of the time, since the human brain isn't a robot that can do such complex calculations. So I thought to myself, 'I can make a program that can do it, though!' So I set out to make a Hangman Solver that could beat the game in 6 guesses or less. I also wanted to reinforce my knowledge of Information Theory and how they can be used to solve problems efficiently."
+        }
+
+
+    ];
+
+    const interestText = document.getElementById("interest-text");
+    const interestDesc = document.getElementById("interest-description");
+    const leftArrow = document.getElementById("left-arrow");
+    const rightArrow = document.getElementById("right-arrow");
+    let i = 0;
+
+    function typeTogether(title, desc) {
+      interestText.textContent = "";
+      interestDesc.textContent = "";
+
+      const totalDuration = 1500;
+      const totalChars = title.length + desc.length;
+
+      let startTime = null;
+      let typedChars = 0;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+
+        const targetChars = Math.floor((elapsed / totalDuration) * totalChars);
+
+        while (typedChars < targetChars && typedChars < totalChars) {
+          if (typedChars < title.length) {
+            interestText.textContent += title.charAt(typedChars);
+          } else {
+            interestDesc.textContent += desc.charAt(typedChars - title.length);
+          }
+          typedChars++;
+        }
+
+        if (typedChars < totalChars) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function eraseBoth(callback) {
+      const title = interestText.textContent;
+      const desc = interestDesc.textContent;
+      const totalDuration = 1500;
+      const totalChars = title.length + desc.length;
+
+      let startTime = null;
+      let erasedChars = 0;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const targetErased = Math.floor((elapsed / totalDuration) * totalChars);
+
+        while (erasedChars < targetErased && erasedChars < totalChars) {
+          if (desc.length - erasedChars > 0) {
+            interestDesc.textContent = desc.substring(0, desc.length - erasedChars);
+          } else if (title.length - (erasedChars - desc.length) > 0) {
+            interestText.textContent = title.substring(0, title.length - (erasedChars - desc.length));
+          }
+          erasedChars++;
+        }
+
+        if (erasedChars < totalChars) {
+          requestAnimationFrame(step);
+        } else {
+          callback();
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function changeInterest(direction) {
+      i = (i + direction + interests.length) % interests.length;
+      eraseBoth(() => {
+        const interest = interests[i];
+        typeTogether(interest.title, interest.desc);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      typeTogether(interests[i].title, interests[i].desc);
+    });
+
+    leftArrow.addEventListener("click", () => changeInterest(-1));
+    rightArrow.addEventListener("click", () => changeInterest(1));
+  </script>
+</body>
+</html>
