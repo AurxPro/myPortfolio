@@ -296,7 +296,7 @@
         nav.classList.remove('active');
       }
     });
-    
+
     const timelineEvents = [
       {
         title: "Comber",
@@ -305,7 +305,7 @@
         img: "NIL"
       },
       {
-        title: "Wordl-Assist",
+        title: "Wordle-Assist",
         desc: "This project is a Wordle solver that intelligently guesses words based on length and feedback, leveraging information theory to maximize guessing efficiency. It encodes the game state into vectors, evaluates entropy-based probabilities, and iteratively narrows down possible solutions. The solver is built with Python and a custom Tkinter GUI, providing a sleek interface that displays best guesses, top suggestions, and game history. By combining probabilistic reasoning, algorithmic logic, and interactive design, this tool automates the Wordle-solving process entirely, demonstrating mastery of mathematical modeling, vectorized computations, and Python GUI development while creating a highly functional and user-friendly Information Theory-powered game assistant.",
         tech: "Information Theory, Python, CustomTkinter",
         img: "NIL"
@@ -350,6 +350,60 @@
         title: "Voice Calculator",
         desc: "This project is a voice-controlled calculator that listens to spoken arithmetic questions and responds verbally with the answers. It uses Google Translate for speech-to-text (STT) to interpret user input, performs the calculation, and then uses text-to-speech (TTS) to vocalize the result. Built with App Inventor, the app handles single-operation math questions in real time, combining voice recognition, calculation logic, and audio output in an interactive interface. This project demonstrates hands-on experience with speech technologies, app development, and user interaction design, turning a simple calculator into a smart, voice-driven assistant.",
         tech: "App Inventor, Google Translate API",
+        img: "NIL"
+      },
+      {
+        title: "Tic-Tac DARSHBOT",
+        desc: "This project is a Tic Tac Toe AI that plays against users using a neural network trained via Q-tables to learn optimal strategies. The AI encodes board positions into vectors, processes them through the neural network, and updates both the vector and the board in real time. Implemented in Python, PyTorch, and Pygame, the system uses AI for every aspect of gameplay and training, enabling the AI to learn, adapt, and make intelligent moves without hardcoded rules. This project demonstrates mastery of reinforcement learning, neural networks, vectorization, and interactive game development, creating a fully autonomous and challenging experience.",
+        tech: "Python, PyTorch, Pygame",
+        img: "NIL"
+      },
+      {
+        title: "Valorant Stats Puller",
+        desc: "This project is a Valorant stats puller that retrieves a player’s recent match performance, including detailed statistics from their last five games. It uses API calls via Python’s requests library to fetch real-time data and formats it into a readable, structured output. The logic handles data parsing, error checking, and presentation, transforming raw API responses into actionable insights for players. Built entirely in Python, this tool demonstrates skills in API integration, data handling, and automation, offering a practical solution for tracking game performance while highlighting expertise in real-time data processing and Python programming.",
+        tech: "Python, API Integration",
+        img: "NIL"
+      },
+      {
+        title: "Minecraft Server Hosting",
+        desc: "This project is a Minecraft server hosted for my class, supporting an average of 5 players and up to 20 simultaneously. It uses downloadable server JAR files and Playit.gg’s free tunneling service to safely expose the server to the internet, avoiding the security risks of traditional port forwarding. I implemented batch scripts to automate starting and stopping the server with a single click, streamlining server management. As the server administrator, I handled debugging, player management, and network troubleshooting. This project demonstrates skills in computer networking, server administration, automation, and system-level scripting, all in a real-world multiplayer environment.",
+        tech: "Networking, Tunneling, Batch Scripting",
+        img: "NIL"
+      },
+      {
+        title: "Writer Lego 51515",
+        desc: "This project is a LEGO 51515 text-writing robot that converts input text into mechanical writing on paper. It uses preprogrammed code for each letter, moving forward to adjust the X-axis and an oscillating mechanism to adjust the Y-axis. Implemented with LEGO 51515 and MicroPython, it combines mathematical positioning, precise motor control, and algorithmic mapping to reproduce text accurately. The project demonstrates mastery of robotics, embedded programming, and coordinate-based motion planning, turning abstract letters into physical output and showcasing both creativity and technical precision in mechanical automation.",
+        tech: "Lego 51515, Lego Mindstorms",
+        img: "NIL"
+      },
+      {
+        title: "Mazastrophy",
+        desc: "This project is a playable maze generator built in Scratch. The maze is created procedurally: at each step, the program randomly decides whether to turn, places a tile, and retreats if it encounters an existing path, ensuring a fully connected, playable layout. The player can navigate the generated maze in real time. This project demonstrates algorithmic thinking, procedural content generation, and interactive design using visual programming, turning a simple game idea into a dynamic, self-generating experience suitable for learning, experimentation, and creative gameplay.",
+        tech: "Scratch, Procedural Generation",
+        img: "NIL"
+      },
+      {
+        title: "Prank Batch and VBS",
+        desc: "I built a toolkit of VBS and Batch scripts that automate keyboard input and system behaviors for bold scripting demos and playful experiments. Features include simulated keypress sequences, recursive command flows, and controlled screen-lock triggers. The logic relies on Windows Script Host, SendKeys-style input emulation, process recursion, and flow-control patterns to push automation boundaries. This project is a raw dive into OS internals, input injection, and timing/execution quirks, showcasing low-level scripting chops, rapid prototyping, and an appetite for exploratory hacking.",
+        tech: "Batch Scripting, VBS",
+        img: "NIL"
+      },
+      {
+        title: "Leaderboard",
+        desc: "This project is a Pygame leaderboard built for a school science fair, designed to track hovercraft race times on a custom track. Players enter their name and score, and the program sorts and displays results in a clean, interactive UI. Implemented with Python, Pygame, and JSON, it handles data storage, retrieval, and dynamic sorting, providing an engaging way to showcase competition results. This project demonstrates UI design, data management, and Python programming in a fun, interactive context, turning a simple leaderboard into a polished tool for tracking performance and enhancing the hovercraft race experience.",
+        tech: "Python, Pygame, JSON",
+        img: "NIL"
+      },
+      {
+        title: "Othello DARSHBOT",
+        desc: "This project is an Othello AI that plays against users using a neural network to make intelligent moves. The AI analyzes the board by encoding positions into vectors, feeding them through the neural network, and updating both the vector and the game board in real time. Built with Python, PyTorch, and Pygame, it combines machine learning, game logic, and interactive GUI design. The entire system leverages AI to evaluate game states, predict optimal moves, and adapt strategies dynamically, showcasing deep understanding of neural networks, vectorization, and applied AI in gaming while creating a challenging, fully playable experience.",
+        tech: "Python, PyTorch, Pygame",
+        img: "NIL"
+      },
+      {
+        title: "ESP32 Tank Sim",
+        desc: "This project is an ESP32 tank controller with AMAZING graphics: a procedurally generated, tile‑based floor and a hyper‑detailed tank sprite. The controller reads key inputs (move, shoot, defensive strafe) and sends them via sockets to a receiver that updates movement and actions in real time. A fast‑strafe defensive mechanic makes dodging shots skillful, and an “inactive signal jammer” adds a tactical twist. Built with ESP32 hardware, MicroPython, and Pygame, it blends embedded systems, networked control, procedural visuals, and polished gameplay — a full‑stack game‑tech demo.",
+        tech: "Python, MicroPython, ESP32, Pygame",
         img: "NIL"
       }
     ];
