@@ -3,134 +3,241 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Darsh's Hobbies</title>
+  <title>Darsh's Timeline</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
-    /* Hide hamburger by default */
-    .menu-icon {
-      display: none;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      font-family: 'Poppins', sans-serif;
     }
 
-    /* Show hamburger only below 995px */
-    @media (max-width: 995px)
-    {
-      .menu-icon
-      {
-        display: block;
-        cursor: pointer;
-      }
+    html { font-size: 62.5%; }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: black;
+      color: white;
+    }
+
+    header {
+      margin-top: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 9%;
+      background-color: transparent;
+      filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.6));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
     }
 
     .logo-container {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-      }
-
-      .logo-img {
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-
-      .logo-text {
-        font-size: 1.8rem;
-        font-weight: 600;
-        color: #52b74b;
-      }
-
-    .cursor {
-      display: inline-block;
-      color: #52b74b;
-      animation: blink 0.8s steps(1) infinite;
-      font-weight: bold;
-      margin-left: 2px;
-    }
-
-    .cursor:nth-of-type(2) {
-      display: none;
-    }
-
-    @keyframes blink {
-      0%, 50% {
-        opacity: 1;
-      }
-      51%, 100% {
-        opacity: 0;
-      }
-    }
-
-    .arrow-buttons {
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin-top: 2rem;
+      gap: 0.6rem;
+      position: relative;
+      z-index: 101;
     }
 
-    .arrow-buttons button {
-      background-color: black;
+    .logo-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 600;
       color: #52b74b;
-      font-size: 2.8rem;
-      border: 2px solid #52b74b;
-      border-radius: 1rem;
-      padding: 1.2rem 1.8rem;
-      margin: 0 1.2rem;
+    }
+
+    nav {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+    }
+
+    nav a {
+      font-size: 1.8rem;
+      color: white;
+      margin: 0 2rem;
+      font-weight: 500;
+      transition: 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #52b74b;
+      border-bottom: 3px solid #52b74b;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2.4rem;
+      color: #52b74b;
       cursor: pointer;
-      transition: all 0.3s ease;
     }
 
-    .arrow-buttons button:hover {
-      background-color: #52b74b;
-      color: black;
-      transform: scale(1.15);
-      box-shadow: 0 0 18px #52b74b;
-    }
-
-      .home-img-75 {
+    @media (max-width: 995px) {
+      .menu-icon { display: block; z-index: 102; }
+      nav {
+        position: absolute;
+        display: none;
+        top: 0;
+        right: 0;
+        transform: none;
+        left: auto;
+        width: 40%;
+        border-left: 3px solid #52b74b;
+        border-bottom: 3px solid #52b74b;
+        border-bottom-left-radius: 2rem;
+        padding: 1rem;
+        background-color: #161616;
+        border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav.active { display: block; }
+      nav a {
         display: block;
-        width: 90%;
-        height: 90%;
+        font-size: 2rem;
+        margin: 3rem 0;
+      }
+      nav a:hover,
+      nav a.active {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-bottom: 0.5rem solid #52b74b;
+      }
     }
 
-    .home-img {
-      display: flex;
-      flex-shrink: 0;
-      margin: 0;
-      overflow: visible;
-      transform: scale(0.75);
-      transform-origin: center;
-      transition: all 0.3s ease-in-out;
+    section {
+      min-height: 100vh;
+      padding: 5rem 9% 5rem;
     }
 
-    .home-img:hover {
-      transform: scale(0.8);
-      box-shadow: 0 0 1000px #52b74b88;
+    .timeline-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 8rem;
     }
 
-    .home {
-      display: flex;
-      align-items: center;          /* Vertically center image & content */
-      justify-content: flex-start;  /* Keep everything left aligned */
-      gap: 2rem;                    /* Space between image and text */
-      min-height: 350px;            /* Prevent height jumps when text changes */
-      padding: 1rem 3rem;
+    .timeline-container h1 {
+      font-size: 6rem;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+      margin-bottom: 5rem;
     }
 
-    .home-content {
-      flex: 1;                     /* Take up remaining space */
-      min-height: 280px;   
-      margin-right: 5.5rem;
-      margin-left: 5.5rem;        /* Prevent vertical shrinking */
+    .timeline-container h1 span {
+      color: #52b74b;
     }
 
-    .info-text {
+    .timeline {
+      position: relative;
+      margin-left: 2rem;
+      padding-left: 2rem;
+      border-left: 3px solid #52b74b;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 4rem;
+      padding-left: 2rem;
+      border-radius: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -13px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      background-color: #52b74b;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #52b74baa;
+      transition: background-color 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #52b74bcc;
+      background-color: #0b230b;
+    }
+
+    /* === Timeline content styling === */
+    .timeline-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #52b74b;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-desc {
+      font-size: 1.6rem;
+      line-height: 1.8;
       color: #ffffff;
-      margin-right: 100px;
+      text-align: justify;
+      margin-bottom: 1rem;
     }
-</style>
+
+    .timeline-tech-label {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #52b74b;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-tech {
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-img {
+      margin-top: 1rem;
+      width: 100%;
+      max-width: 350px;
+      border-radius: 1rem;
+      box-shadow: 0 0 18px #52b74b88;
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #52b74bcc;
+    }
+
+    @media (max-width: 995px) {
+      .timeline-container { margin: 5rem 4rem; padding-top: 8rem; }
+      .timeline-container h1 { font-size: 5rem; }
+      .timeline { margin-left: 1rem; padding-left: 1.5rem; }
+      .timeline-item { padding-left: 1.5rem; margin-bottom: 3rem; }
+      .timeline-title { font-size: 2.4rem; }
+      .timeline-desc { font-size: 1.4rem; }
+      .timeline-tech-label { font-size: 1.6rem; }
+      .timeline-tech { font-size: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -141,7 +248,7 @@
 
     <nav>
       <a href="index.html">Home</a>
-      <a href="#" class="active">Projects</a>
+      <a href="projects.html" class="active">Projects</a>
       <a href="#">Skills</a>
       <a href="hobbies.html">Hobbies</a>
       <a href="awards.html">Awards</a>
@@ -153,22 +260,10 @@
     </div>
   </header>
 
-  <section class="home">
-    <div class="home-img">
-      <img src="Darsh_Coding.png" alt="Darsh's Image" class="home-img-75"/>
-    </div>
-    <div class="home-content">
-      <h1>Hi, It's <span>Darsh.</span></h1>
-      <h3 class="typing-text">
-        I made a <span id="interest-text"></span><span class="cursor">|</span>
-      </h3>
-      <p>
-        <span class="info-text" id="interest-description"></span>
-      </p>
-      <div class="arrow-buttons">
-        <button id="left-arrow" aria-label="Previous Interest"><i class="fa-solid fa-left-long"></i></button>
-        <button id="right-arrow" aria-label="Next Interest"><i class="fa-solid fa-right-long"></i></button>
-      </div>
+  <section>
+    <div class="timeline-container">
+      <h1>My <span>Projects</span></h1>
+      <div class="timeline" id="timeline"></div>
     </div>
   </section>
 
@@ -184,131 +279,89 @@
       });
     });
 
-    document.addEventListener('click', function (event) {
+    document.addEventListener('click', function(event) {
       const nav = document.querySelector('header nav');
       const menuIcon = document.querySelector('.menu-icon');
-      if (
-        nav.classList.contains('active') &&
-        !nav.contains(event.target) &&
-        !menuIcon.contains(event.target)
-      ) {
+      if (nav.classList.contains('active') && !nav.contains(event.target) && !menuIcon.contains(event.target)) {
         nav.classList.remove('active');
       }
     });
 
-    const interests = [
-        {
-        title: "Custom Cipher.",
-        desc: "In my 2025 June Holdiays, I made a custom cipher that encrypts and decrypts messages using 4 layers of encryption. The first layer is my custom algorithm that turns the entire unicode character set into a 'keyboard' of characters, where the encrypted result is the process of moving a cursor around and reaching the character you want to type. My initial idea was to make it work for ASCII characters, and the keyboard being the actual QWERTY layout, but then I realized that it would be way too limiting, so I expanded it to the entire unicode character set to support any and all text. The second layer is also a custom algorithm. However, the previous cipher was a 'viusal' cipher since there was a visual representation of the keyboard. However, this cipher works on the more binary side of text. My 2nd layer takes in each character of the text and converts it into the unicode binary representation, and then it rearranges the bits to make a new character, and this character, alongside the ordering of the bits, is the final result of the second layer. The third layer is a simple XOR cipher with a user-given key. The key is literally anything, since in the end it converts to bytes and XORs the bytes of the text with that of the key. The final layer isn't exactly a layer, but more of a wrapper. It takes the new, possibly corrupted text, and encodes it with Base64, a common wrapper to make all characters ASCII-friendly. The decryption process is the exact opposite of the encryption process, and it works flawlessly! The reason I made this cipher is because I felt like this project would be super fun and rewarding, whilist providing me with real-world value. I also made a GUI for it, though its only a simple custom tkinter window with a text box and a button to encrypt and decrypt the text. Technologies used: Python, Tkinter, Base64, Unicode, Math"
-        },
-
-        {
-        title: "Wordle Solver.",
-        desc: "In my 2025 June Holidays, I made a Wordle Solver that can solve Wordle in 6 guesses or less. Before I explain how it works, I want to clarify how Wordle works. In Wordle, you have 6 guesses to guess a 5-letter word. After each guess, the game gives you feedback on your guess: if a letter is in the word and in the correct position, it turns green; if a letter is in the word but in the wrong position, it turns yellow; and if a letter is not in the word at all, it turns gray. The goal is to use this feedback to narrow down the possibilities and guess the correct word within 6 tries. My Wordle Solver uses an array of the 13,000 words that are used in the game, and it uses entropy to determine the best guess. Entropy is a measure of how much information is provided after a certain guess. The solver calculates the entropy for each word in the list based on the feedback it would receive if that word were guessed. It then selects the word with the highest entropy as the next guess. This process continues until the correct word is found or all 6 guesses are used up. The solver is able to solve any Wordle puzzle in 6 guesses or less, and it can also be used to solve other similar word games. I made this solver because I wanted to challenge myself and see if I could create a program that could solve Wordle efficiently. The reason I made this was a bit weird. I saw my friend making a bot that could play Wordle and beat it in 8 guesses, and I thought to myself, 'I can do better than that!' So I set out to make a Wordle Solver that could beat the game in 6 guesses or less. I also wanted to learn more about algorithms and how they can be used to solve problems efficiently. Technologies used: Python, Information Theory, Algorithms, CTkinter."
-        },
-
-        {
-        title: "Hangman Solver.",
-        desc: "In my 2025 June Holidays, I made a Hangman Solver that can solve Hangman puzzles in 6 guesses or less. Before I explain how it works, I want to clarify how Hangman works. In Hangman, you have a certain number of guesses to guess a word. After each guess, the game gives you feedback on your guess: if a letter is in the word, it is revealed in the correct position; if a letter is not in the word, it is not revealed. The goal is to use this feedback to narrow down the possibilities and guess the correct word within the given number of guesses. My Hangman Solver uses an array of the 1000 words that are used in the game, and it uses entropy to determine the best guess. Entropy is a measure of how much information is provided after a certain guess. The solver calculates the entropy for each word in the list based on the feedback it would receive if that word were guessed. It then selects the word with the highest entropy as the next guess. This process continues until the correct word is found or all guesses are used up. The solver is able to solve any Hangman puzzle in 6 guesses or less, and it can also be used to solve other similar word games. I made this solver because after making the Wordle Solver, I wanted to challenge myself and see if I could create a program that could solve Hangman efficiently. The reason I made this was because I was playing Hangman with my friends, and I realized that I wasn't able to guess the word in 6 guesses most of the time, since the human brain isn't a robot that can do such complex calculations. So I thought to myself, 'I can make a program that can do it, though!' So I set out to make a Hangman Solver that could beat the game in 6 guesses or less. I also wanted to reinforce my knowledge of Information Theory and how they can be used to solve problems efficiently. Technologies used: Python, Information Theory, Algorithms, CTkinter."
-        },
-        {
-          title: "Comber.",
-          desc: "Before you attack the name, I came up with that in a few seconds, ok? Comber is a 2D Unity game that I made in the 2025 June holidays. The game is a simple 1v1 local battle game where each player controls a character that moves around with recharging abilities and tries to hit the other player with projectiles. The game features simple graphics, but the gameplay is fast-paced and fun. I made this game to learn more about game development and to challenge myself to create a complete game from scratch. I also wanted to experiment with different game mechanics and see how they would work in a multiplayer setting. Technologies used: C#, Unity, Game Development."
-        },
-        {
-          title: "Boing Shoot.",
-          desc: "Boing Shoot is a 2D PyGame game that I made in the span of 2-4 English and Math lessons since I was free after doing the classwork. The game is a cool minimal online multiplayer game where each player controls a bouncing ball with actual bounces. "
-        }
-
-
+    const timelineEvents = [
+      {
+        title: "Comber",
+        desc: "A fast-paced 1v1 duel game with recharging abilities like dash, lift, and shoot. Players can move, jump, and engage in combat with a high skill ceiling but low skill floor, making it accessible yet challenging. The game features a heal station requiring precise jumps to survive, with health managed via a dedicated script. Built in Unity using C#, this project highlights character design, ability balancing, and gameplay polish. <em>(Side note: designed to be so fun and balanced, it’s arguably better than some game companies like Riot)</em>",
+        tech: "Python, Information Theory",
+        img: "NIL"
+      },
+      {
+        title: "Wordl-Assist",
+        desc: "This project is a Wordle solver that intelligently guesses words based on length and feedback, leveraging information theory to maximize guessing efficiency. It encodes the game state into vectors, evaluates entropy-based probabilities, and iteratively narrows down possible solutions. The solver is built with Python and a custom Tkinter GUI, providing a sleek interface that displays best guesses, top suggestions, and game history. By combining probabilistic reasoning, algorithmic logic, and interactive design, this tool automates the Wordle-solving process entirely, demonstrating mastery of mathematical modeling, vectorized computations, and Python GUI development while creating a highly functional and user-friendly Information Theory-powered game assistant.",
+        tech: "Information Theory, Python, CustomTkinter",
+        img: "NIL"
+      },
+      {
+        title: "Hangman's Savior",
+        desc: "This project is a Hangman solver that efficiently guesses words based on length and revealed letters. It leverages information theory to determine the optimal next guess, maximizing the chance of success with minimal attempts. The logic systematically evaluates letter probabilities and updates the guessing strategy in real time. Built with Python and a custom Tkinter GUI, it provides an interactive and user-friendly interface for gameplay. By combining mathematical reasoning, probability, and algorithmic thinking, this project showcases skills in data-driven decision-making, GUI development, and applied mathematics, turning a classic word game into a smart, automated solver.",
+        tech: "Information Theory, Python, CustomTkinter",
+        img: "NIL"
+      },
+      {
+        title: "DigiDarsh",
+        desc: "This project is a personalized chatbot that answers questions about you using stored context and a sleek, user-friendly UI. Frontend built with HTML, CSS, and JavaScript; backend logic calls the Cerebras API, sending each user query along with the appropriate contextual data to produce accurate, personalized responses. I designed prompt-engineering patterns to structure context and queries for consistent output, and added UI safeguards and consent checks to keep interactions safe and privacy-respecting. Intended for embedding on my portfolio site, this tool showcases skills in API integration, prompt engineering, web development, and secure UX design.",
+        tech: "Cerebras API, HTML, CSS, JavaScript, Prompt Engineering",
+        img: "NIL"
+      },
+      {
+        title: "Turtle Master",
+        desc: "This project converts any image file into fully functional Python Turtle code, recreating the image with a controllable number of lines. It automatically analyzes pixel data, resizes the image as needed, and generates drawing instructions that perfectly replicate the original picture. What makes this especially impressive is that Turtle is an extremely basic library, originally meant for simple educational drawings—yet this project pushes it to its limits. Built with Python and PIL, it was inspired by a CS assignment for SG60 drawings, where I thought, “Why not automate this?” This demonstrates algorithmic thinking, image analysis, and creative problem-solving.",
+        tech: "PIL, Python, Turtle Graphics",
+        img: "NIL"
+      },
+      {
+        title: "Ultimate Ciphex",
+        desc: "This project encrypts any text—even emojis and quirky Unicode symbols—into a fully ASCII-friendly format. It combines XOR, Base64, and two custom-designed algorithms, allowing for practically infinite keys and highly secure encryption. The core logic cleverly ensures every character is transformed while remaining fully reversible for decryption. The custom Tkinter GUI delivers a sleek, user-friendly interface, while Python’s unicodedata guarantees consistent Unicode handling. This project demonstrates mastery of algorithm design, text encoding, and GUI development, turning complex encryption concepts into an accessible and visually polished tool that’s as functional as it is creative.",
+        tech: "Python, CustomTkinter, Unicode",
+        img: "NIL"
+      },
+      {
+        title: "Minecraft Stronghold Finder",
+        desc: "This project calculates the nearest Minecraft stronghold—a hidden fortress where the game’s End Portal is located—using just two Eyes of Ender, items that players throw to reveal the direction of nearby strongholds. It applies the Law of Sines to triangulate the stronghold’s exact position based on angles observed from two distinct locations. Built in Python, the program performs precise mathematical calculations to output accurate coordinates. By combining game logic with applied math, this tool turns a time-consuming in-game task into a fast, efficient process, highlighting skills in algorithmic thinking, geometry, and Python programming.",
+        tech: "Python, Law of Sines",
+        img: "NIL"
+      },
+      {
+        title: "Rubkik's Cube Solver",
+        desc: "This project is a Rubik’s Cube solver built with LEGO 51515. It scans each cube tile, applies a proven algorithm to compute the required moves, and executes them mechanically. The build features a basket-like container to rotate the cube’s yaw and a grabber to manipulate the top layer, rotating it along the cube’s roll. Implemented with LEGO 51515 hardware and MicroPython, it combines mathematical problem-solving, robotics, and programming. This project demonstrates expertise in mechanical design, algorithm implementation, and embedded control systems, turning a classic puzzle into an automated, fully functional robotic solution.",
+        tech: "Lego 51515, MicroPython",
+        img: "NIL"
+      }
     ];
 
-    const interestText = document.getElementById("interest-text");
-    const interestDesc = document.getElementById("interest-description");
-    const leftArrow = document.getElementById("left-arrow");
-    const rightArrow = document.getElementById("right-arrow");
-    let i = 0;
+    const timeline = document.getElementById('timeline');
 
-    function typeTogether(title, desc) {
-      interestText.textContent = "";
-      interestDesc.textContent = "";
+    function createTimelineItem(event) {
+      const item = document.createElement('div');
+      item.className = 'timeline-item';
 
-      const totalDuration = 1500;
-      const totalChars = title.length + desc.length;
+      let html = `
+        <div class="timeline-title">${event.title}</div>
+        <div class="timeline-desc">${event.desc}</div>
+        <div class="timeline-tech-label">Technologies used:</div>
+        <div class="timeline-tech">${event.tech}</div>
+      `;
 
-      let startTime = null;
-      let typedChars = 0;
-
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-
-        const targetChars = Math.floor((elapsed / totalDuration) * totalChars);
-
-        while (typedChars < targetChars && typedChars < totalChars) {
-          if (typedChars < title.length) {
-            interestText.textContent += title.charAt(typedChars);
-          } else {
-            interestDesc.textContent += desc.charAt(typedChars - title.length);
-          }
-          typedChars++;
-        }
-
-        if (typedChars < totalChars) {
-          requestAnimationFrame(step);
-        }
+      if (event.img && event.img !== "NIL") {
+        html += `<img src="${event.img}" alt="${event.title}" class="timeline-img" />`;
       }
 
-      requestAnimationFrame(step);
+      item.innerHTML = html;
+      return item;
     }
 
-    function eraseBoth(callback) {
-      const title = interestText.textContent;
-      const desc = interestDesc.textContent;
-      const totalDuration = 1500;
-      const totalChars = title.length + desc.length;
-
-      let startTime = null;
-      let erasedChars = 0;
-
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const targetErased = Math.floor((elapsed / totalDuration) * totalChars);
-
-        while (erasedChars < targetErased && erasedChars < totalChars) {
-          if (desc.length - erasedChars > 0) {
-            interestDesc.textContent = desc.substring(0, desc.length - erasedChars);
-          } else if (title.length - (erasedChars - desc.length) > 0) {
-            interestText.textContent = title.substring(0, title.length - (erasedChars - desc.length));
-          }
-          erasedChars++;
-        }
-
-        if (erasedChars < totalChars) {
-          requestAnimationFrame(step);
-        } else {
-          callback();
-        }
-      }
-
-      requestAnimationFrame(step);
-    }
-
-    function changeInterest(direction) {
-      i = (i + direction + interests.length) % interests.length;
-      eraseBoth(() => {
-        const interest = interests[i];
-        typeTogether(interest.title, interest.desc);
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      typeTogether(interests[i].title, interests[i].desc);
+    timelineEvents.forEach(event => {
+      timeline.appendChild(createTimelineItem(event));
     });
-
-    leftArrow.addEventListener("click", () => changeInterest(-1));
-    rightArrow.addEventListener("click", () => changeInterest(1));
   </script>
 </body>
 </html>
