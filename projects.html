@@ -149,6 +149,7 @@
       color: #52b74b;
     }
 
+    /* Desktop timeline */
     .timeline {
       position: relative;
       margin-left: 2rem;
@@ -183,7 +184,6 @@
       background-color: #0b230b;
     }
 
-    /* === Timeline content styling === */
     .timeline-title {
       font-size: 2.8rem;
       font-weight: 700;
@@ -227,15 +227,27 @@
       box-shadow: 0 0 30px #52b74bcc;
     }
 
-    @media (max-width: 995px) {
-      .timeline-container { margin: 5rem 4rem; padding-top: 8rem; }
-      .timeline-container h1 { font-size: 5rem; }
-      .timeline { margin-left: 1rem; padding-left: 1.5rem; }
-      .timeline-item { padding-left: 1.5rem; margin-bottom: 3rem; }
-      .timeline-title { font-size: 2.4rem; }
-      .timeline-desc { font-size: 1.4rem; }
+    /* Mobile-friendly timeline */
+    @media (max-width: 768px) {
+      section { padding: 5rem 2rem 5rem; }
+      .timeline { margin-left: 0; padding-left: 0; border-left: none; }
+      .timeline-item {
+        padding: 1.5rem;
+        margin-bottom: 2.5rem;
+        border-radius: 1rem;
+        background-color: #0b230b22;
+      }
+      .timeline-item::before {
+        left: 0;
+        top: -2px;
+        width: 15px;
+        height: 15px;
+      }
+      .timeline-title { font-size: 2.2rem; }
+      .timeline-desc { font-size: 1.5rem; }
       .timeline-tech-label { font-size: 1.6rem; }
-      .timeline-tech { font-size: 1.5rem; }
+      .timeline-tech { font-size: 1.4rem; }
+      .timeline-img { max-width: 100%; }
     }
   </style>
 </head>
@@ -245,7 +257,6 @@
       <img src="Darsh.png" alt="Darsh's Icon" class="logo-img" />
       <a href="index.html" class="logo-text">Darsh</a>
     </div>
-
     <nav>
       <a href="index.html">Home</a>
       <a href="projects.html" class="active">Projects</a>
@@ -254,7 +265,6 @@
       <a href="awards.html">Awards</a>
       <a href="#">Contact</a>
     </nav>
-
     <div class="menu-icon" onclick="toggleMenu()">
       <i class="fa-solid fa-bars"></i>
     </div>
@@ -286,7 +296,7 @@
         nav.classList.remove('active');
       }
     });
-
+    
     const timelineEvents = [
       {
         title: "Comber",
@@ -334,6 +344,12 @@
         title: "Rubkik's Cube Solver",
         desc: "This project is a Rubik’s Cube solver built with LEGO 51515. It scans each cube tile, applies a proven algorithm to compute the required moves, and executes them mechanically. The build features a basket-like container to rotate the cube’s yaw and a grabber to manipulate the top layer, rotating it along the cube’s roll. Implemented with LEGO 51515 hardware and MicroPython, it combines mathematical problem-solving, robotics, and programming. This project demonstrates expertise in mechanical design, algorithm implementation, and embedded control systems, turning a classic puzzle into an automated, fully functional robotic solution.",
         tech: "Lego 51515, MicroPython",
+        img: "NIL"
+      },
+      {
+        title: "Voice Calculator",
+        desc: "This project is a voice-controlled calculator that listens to spoken arithmetic questions and responds verbally with the answers. It uses Google Translate for speech-to-text (STT) to interpret user input, performs the calculation, and then uses text-to-speech (TTS) to vocalize the result. Built with App Inventor, the app handles single-operation math questions in real time, combining voice recognition, calculation logic, and audio output in an interactive interface. This project demonstrates hands-on experience with speech technologies, app development, and user interaction design, turning a simple calculator into a smart, voice-driven assistant.",
+        tech: "App Inventor, Google Translate API",
         img: "NIL"
       }
     ];
