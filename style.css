@@ -22,6 +22,7 @@ body {
   color: white;
 }
 
+/* HEADER */
 header {
   margin-top: 20px;
   position: fixed;
@@ -49,6 +50,7 @@ header {
   transform: scale(1.1);
 }
 
+/* DESKTOP NAV */
 nav a {
   font-size: 1.8rem;
   color: white;
@@ -64,7 +66,21 @@ nav a.active {
   border-bottom: 3px solid #52b74b;
 }
 
+/* HAMBURGER ICON */
+.menu-icon {
+  display: none;
+  font-size: 2.4rem;
+  color: #52b74b;
+  cursor: pointer;
+  z-index: 102;
+}
+
+/* MOBILE NAV */
 @media (max-width: 995px) {
+  .menu-icon {
+    display: block;
+  }
+
   nav {
     position: absolute;
     display: none;
@@ -77,16 +93,32 @@ nav a.active {
     padding: 1rem;
     background-color: #161616;
     border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.6);
   }
 
   nav.active {
     display: block;
+    animation: slideIn 0.25s ease forwards;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
   nav a {
     display: block;
     font-size: 2rem;
     margin: 3rem 0;
+    transition: 0.3s ease;
   }
 
   nav a:hover,
@@ -94,14 +126,17 @@ nav a.active {
     padding: 1rem;
     border-radius: 0.5rem;
     border-bottom: 0.5rem solid #52b74b;
+    color: #52b74b;
   }
 }
 
+/* SECTIONS */
 section {
   min-height: 100vh;
   padding: 5rem 9% 5rem;
 }
 
+/* HOME */
 .home {
   display: flex;
   justify-content: center;
@@ -134,7 +169,7 @@ span {
   letter-spacing: 0.03rem;
 }
 
-
+/* HOME IMG */
 .home-img {
   border-radius: 50%;
 }
@@ -152,6 +187,7 @@ span {
   transform: scale(1.05);
 }
 
+/* SOCIAL ICONS */
 .social-icons a {
   display: inline-flex;
   justify-content: center;
@@ -174,6 +210,7 @@ span {
   box-shadow: 0 0 25px #52b74b;
 }
 
+/* BUTTON */
 .btn {
   display: inline-block;
   padding: 1rem 2.8rem;
@@ -195,6 +232,7 @@ span {
   box-shadow: 0 0 25px #52b74b;
 }
 
+/* TYPING EFFECT */
 .typing-text {
   font-size: 3.4rem;
   font-weight: 600;
@@ -213,6 +251,7 @@ span {
   }
 }
 
+/* RESPONSIVE FIXES */
 @media (max-width: 1000px) {
   .home {
     gap: 4rem;
@@ -239,6 +278,7 @@ span {
   }
 }
 
+/* SOCIAL SECTION */
 .social-section {
   margin-top: 4rem;
 }
