@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat with Darsh's AI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html { font-size: 62.5%; }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: black;
+      color: white;
+    }
+
+    header {
+      margin-top: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 9%;
+      background-color: transparent;
+      filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.6));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      position: relative;
+      z-index: 101;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #52b74b;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #52b74b;
+    }
+
+    nav {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+    }
+
+    nav a {
+      font-size: 1.8rem;
+      color: white;
+      margin: 0 2rem;
+      font-weight: 500;
+      transition: 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #52b74b;
+      border-bottom: 3px solid #52b74b;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2.4rem;
+      color: #52b74b;
+      cursor: pointer;
+    }
+
+    @media (max-width: 995px) {
+      .menu-icon { display: block; z-index: 102; }
+      nav {
+        position: absolute;
+        display: none;
+        top: 0;
+        right: 0;
+        transform: none;
+        left: auto;
+        width: 40%;
+        border-left: 3px solid #52b74b;
+        border-bottom: 3px solid #52b74b;
+        border-bottom-left-radius: 2rem;
+        padding: 1rem;
+        background-color: #161616;
+        border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav.active { display: block; }
+      nav a {
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
+      }
+      nav a:hover,
+      nav a.active {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-bottom: 0.5rem solid #52b74b;
+      }
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 5rem 9% 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-container {
+      max-width: 1000px;
+      width: 100%;
+      margin-top: 6rem;
+    }
+
+    .chat-container h1 {
+      font-size: 6rem;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .chat-container h1 span {
+      color: #52b74b;
+    }
+
+    #chat-box {
+      background-color: #0b230b;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 0 25px rgba(82, 183, 75, 0.2);
+      display: flex;
+      flex-direction: column;
+      height: 65vh;
+    }
+
+    #output {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    #output::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #output::-webkit-scrollbar-track {
+      background: rgba(82, 183, 75, 0.1);
+      border-radius: 4px;
+    }
+
+    #output::-webkit-scrollbar-thumb {
+      background: #52b74b;
+      border-radius: 4px;
+    }
+
+    .message {
+      padding: 1.5rem 2rem;
+      border-radius: 1.5rem;
+      margin: 1rem 0;
+      max-width: 75%;
+      word-wrap: break-word;
+      font-size: 1.6rem;
+      line-height: 1.6;
+    }
+
+    .user-msg {
+      background-color: #1a4d1a;
+      color: white;
+      align-self: flex-end;
+      margin-left: auto;
+      border-bottom-right-radius: 0.5rem;
+    }
+
+    .ai-msg {
+      background-color: #0f1f0f;
+      color: white;
+      align-self: flex-start;
+      border-bottom-left-radius: 0.5rem;
+    }
+
+    .ai-msg strong {
+      color: #52b74b;
+      font-weight: 600;
+    }
+
+    .typing {
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    #input-area {
+      display: flex;
+      gap: 1rem;
+    }
+
+    #prompt {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      border-radius: 1rem;
+      background-color: #0f1f0f;
+      color: white;
+      font-family: inherit;
+      font-size: 1.6rem;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    #prompt:focus {
+      border-color: #52b74b;
+      box-shadow: 0 0 15px rgba(82, 183, 75, 0.3);
+    }
+
+    #prompt::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    button {
+      padding: 1.5rem 3rem;
+      border-radius: 1rem;
+      background-color: #52b74b;
+      color: black;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.6rem;
+    }
+
+    button:hover {
+      background-color: #66cc66;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(82, 183, 75, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 5rem 2rem 5rem; }
+      .chat-container h1 { font-size: 4rem; }
+      #chat-box { height: 70vh; padding: 1.5rem; }
+      .message { font-size: 1.5rem; max-width: 85%; }
+      #prompt, button { font-size: 1.5rem; padding: 1.2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="Darsh.png" class="logo-img"></img>
+      <a href="index.html" class="logo-text">Darsh</a>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="hobbies.html">Hobbies</a>
+      <a href="awards.html">Awards</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="menu-icon" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </header>
+
+  <section>
+    <div class="chat-container">
+      <h1>Chat with <span>Darsh AI</span></h1>
+      <div id="chat-box">
+        <div id="output"></div>
+        <div id="input-area">
+          <input id="prompt" placeholder="ask me anything about darsh..." autocomplete="off">
+          <button onclick="askAI()">Send</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.querySelector('header nav');
+      nav.classList.toggle('active');
+    }
+
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('header nav').classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', function(event) {
+      const nav = document.querySelector('header nav');
+      const menuIcon = document.querySelector('.menu-icon');
+      if (nav.classList.contains('active') && !nav.contains(event.target) && !menuIcon.contains(event.target)) {
+        nav.classList.remove('active');
+      }
+    });
+
+    const chatHistory = [];
+
+    document.getElementById("prompt").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        askAI();
+      }
+    });
+
+    async function askAI() {
+      const prompt = document.getElementById("prompt").value.trim();
+      if (!prompt) return;
+
+      chatHistory.push({ role: "user", content: prompt });
+      updateOutput();
+      document.getElementById("prompt").value = "";
+
+      const outputDiv = document.getElementById("output");
+      const typingElem = document.createElement('div');
+      typingElem.className = 'ai-msg message typing';
+      typingElem.innerHTML = '<strong>Darsh:</strong> thinking...';
+      outputDiv.appendChild(typingElem);
+      outputDiv.scrollTop = outputDiv.scrollHeight;
+
+      try {
+        const response = await fetch("https://api.cerebras.ai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer csk-v6fk9t28mwxv698mkx26932jr63dd6m2jhx2ky55fh3hxcvf"
+          },
+          body: JSON.stringify({
+            model: "gpt-oss-120b",
+            stream: false,  
+            max_tokens: 5000,
+            temperature: 1.2,
+            top_p: 1,
+            messages: [
+              { role: "system", content: "You are Darsh Singhal's AI portfolio assistant. Talk like a Gen Z but not too excessive. Use emojis, don't start with capital letters, use abbreviations. Try capitalizing to emphasize. Talk in FPV. Respond to questions about Darsh - his coding, tech projects, achievements, hobbies like gaming. For unrelated questions, politely redirect. For common knowledge/small talk, continue naturally. Use a lively, engaging tone, no bullet points or markdown. Stick to verified facts. Give vivid examples. Darsh is a 13-year-old tech enthusiast in Singapore, Year 1 at NUS High School of Math and Science, loves coding, plays Valorant and Minecraft." },
+              ...chatHistory
+            ]
+          })
+        });
+
+        const data = await response.json();
+        const aiMessage = data.choices?.[0]?.message?.content || "oof something went wrong! try again 🤖";
+
+        if (outputDiv.contains(typingElem)) {
+          outputDiv.removeChild(typingElem);
+        }
+
+        chatHistory.push({ role: "assistant", content: aiMessage });
+        updateOutput();
+
+      } catch (error) {
+        if (outputDiv.contains(typingElem)) {
+          outputDiv.removeChild(typingElem);
+        }
+        
+        const errorMessage = "oops! network error - check your connection and try again 🔌";
+        chatHistory.push({ role: "assistant", content: errorMessage });
+        updateOutput();
+      }
+    }
+
+    function updateOutput() {
+      const outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = chatHistory.map(msg => {
+        const cls = msg.role === "user" ? "user-msg message" : "ai-msg message";
+        const label = msg.role === "user" ? "You" : "Darsh";
+        return `<div class='${cls}'>${msg.content}</div>`;
+      }).join("");
+      outputDiv.scrollTop = outputDiv.scrollHeight;
+    }
+
+    setTimeout(() => {
+      if (chatHistory.length === 0) {
+        chatHistory.push({ 
+          role: "assistant", 
+          content: "hey there! 👋 im darsh's ai assistant. ask me anything about his coding projects, school life at nus high, gaming skills, or whatever youre curious about! 🚀" 
+        });
+        updateOutput();
+      }
+    }, 800);
+  </script>
+</body>
+</html>
